@@ -25,22 +25,19 @@ bool equation(std::complex<double> z) {
 
 int main() {
 
-	int i;
-	int j;
-
-	int x = 500;
-	int y = 500;
+	double i;
+	double j;
 
 	std::ofstream file;
 	file.open("image.ppm");
 
-	file << "P3\n" << x << ' ' << y << "\n255\n";
+	file << "P3\n" << 500 << ' ' << 500 << "\n255\n";
+
+	equation(std::complex<double>(1, 0));
 
 
-
-
-	for (i = 0; i < y; i++) {
-		for (j = 0; j < x; j++) {
+	for (i = -2; i < 1; i+=0.006) {
+		for (j = -1; j < 1; j+=0.004) {
 			std::complex<double> z(j, i);
 			if (equation(z)) {
 				file << "225 225 225" << "\n";
