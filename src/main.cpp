@@ -4,16 +4,16 @@
 #include <vector>
 #include <algorithm>
 
-bool equation(std::complex<double> z) {
+bool finite(std::complex<double> z) {
 	std::vector<double> list;
-	list.push_back(std::norm(z));
+	list.push_back(abs(z));
 	int k;
 
 	std::complex<double> temp(0, 0);
 
-	for (k = 0; k < 5; k++) {
+	for (k = 0; k < 10; k++) {
 		temp = (temp * temp) + z;
-		list.push_back(std::norm(temp));
+		list.push_back(abs(temp));
 	}
 
 	if (std::is_sorted(begin(list), end(list))) {
@@ -28,19 +28,22 @@ int main() {
 	double i;
 	double j;
 
+	const int height = 500;
+	const int width = 750;
+
+	const double x_lit = 3.0 / width;
+	const double y_lit = 2.0 / height;
+
 	std::ofstream file;
 	file.open("image.ppm");
 
-	file << "P3\n" << 500 << ' ' << 500 << "\n255\n";
+	file << "P3\n" << width << ' ' << height << "\n255\n";
 
-	equation(std::complex<double>(1, 0));
-
-
-	for (i = -2; i < 1; i+=0.006) {
-		for (j = -1; j < 1; j+=0.004) {
-			std::complex<double> z(j, i);
-			if (equation(z)) {
-				file << "225 225 225" << "\n";
+	for (j = 1.0; j > -1.0; j -= y_lit) { // y-axis up to down
+		for (i = -2.0; i < 1.0; i += x_lit) { //x-axis left to right
+			std::complex<double> z(i, j);
+			if (finite(z)) {
+				file << "255 255 255" << "\n";
 			}
 			else {
 				file << "0 0 0" << "\n";
