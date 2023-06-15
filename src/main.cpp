@@ -1,19 +1,20 @@
 #include <iostream>
 #include <fstream>
 #include <complex>
-#include <vector>
 #include <algorithm>
 
-int finite(std::complex<double> z) {
+int mandelbrot(std::complex<double> c) {
 	int k;
 
-	std::complex<double> temp(0, 0);
-
+	std::complex<double> z(0, 0);
+	/* a point c belongs to the Mandelbrot set if and only if
+	   |Z_n| <= 2 for all values of n >= 0
+	*/ 
 	for (k = 0; k < 100; k++) {
-		if (std::norm(temp) > 4.0) {
+		if (abs(z) > 2.0) {
 			return k;
 		}
-		temp = (temp * temp) + z;
+		z = (z * z) + c;
 	}
 	
 	return 100;
@@ -37,8 +38,8 @@ int main() {
 
 	for (j = 1.0; j > -1.0; j -= y_lit) { // y-axis up to down
 		for (i = -2.0; i < 1.0; i += x_lit) { //x-axis left to right
-			std::complex<double> z(i, j);
-			if (finite(z) == 100) {
+			std::complex<double> c(i, j);
+			if (mandelbrot(c) == 100) {
 				file << "0 0 0" << "\n";
 			}
 			else {
