@@ -4,23 +4,19 @@
 #include <vector>
 #include <algorithm>
 
-bool finite(std::complex<double> z) {
-	std::vector<double> list;
-	list.push_back(abs(z));
+int finite(std::complex<double> z) {
 	int k;
 
 	std::complex<double> temp(0, 0);
 
-	for (k = 0; k < 10; k++) {
+	for (k = 0; k < 100; k++) {
+		if (std::norm(temp) > 4.0) {
+			return k;
+		}
 		temp = (temp * temp) + z;
-		list.push_back(abs(temp));
-	}
-
-	if (std::is_sorted(begin(list), end(list))) {
-		return false;
 	}
 	
-	return true;
+	return 100;
 }
 
 int main() {
@@ -42,11 +38,11 @@ int main() {
 	for (j = 1.0; j > -1.0; j -= y_lit) { // y-axis up to down
 		for (i = -2.0; i < 1.0; i += x_lit) { //x-axis left to right
 			std::complex<double> z(i, j);
-			if (finite(z)) {
-				file << "255 255 255" << "\n";
+			if (finite(z) == 100) {
+				file << "0 0 0" << "\n";
 			}
 			else {
-				file << "0 0 0" << "\n";
+				file << "255 255 255" << "\n";
 			}
 		}
 	}
