@@ -1,7 +1,6 @@
 #include <iostream>
 #include <fstream>
 #include <complex>
-#include <algorithm>
 
 int mandelbrot(std::complex<double> c) {
 	int k;
