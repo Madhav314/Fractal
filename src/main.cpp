@@ -24,10 +24,10 @@ int main() {
 	double i;
 	double j;
 
-	const int width = 750;
+	const int width = 812;
 	const int height = 625;
 
-	const double x_lit = 3.0 / width;
+	const double x_lit = 3.25 / width;
 	const double y_lit = 2.5 / height;
 
 	std::ofstream file;
@@ -36,7 +36,7 @@ int main() {
 	file << "P3\n" << width << ' ' << height << "\n255\n";
 
 	for (j = 1.25; j > -1.25; j -= y_lit) { // y-axis up to down
-		for (i = -2.25; i < 0.75; i += x_lit) { //x-axis left to right
+		for (i = -2.25; i < 1; i += x_lit) { //x-axis left to right
 			std::complex<double> c(i, j);
 			switch (mandelbrot(c)) {
 			case 100:
