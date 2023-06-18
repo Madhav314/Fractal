@@ -38,11 +38,40 @@ int main() {
 	for (j = 1.0; j > -1.0; j -= y_lit) { // y-axis up to down
 		for (i = -2.0; i < 1.0; i += x_lit) { //x-axis left to right
 			std::complex<double> c(i, j);
-			if (mandelbrot(c) == 100) {
+			switch (mandelbrot(c)) {
+			case 100:
 				file << "0 0 0" << "\n";
-			}
-			else {
+				break;
+			case 90:
+				file << "25 25 25" << "\n";
+				break;
+			case 80:
+				file << "50 50 50" << "\n";
+				break;
+			case 70:
+				file << "75 75 75" << "\n";
+				break;
+			case 60:
+				file << "100 100 100" << "\n";
+				break;
+			case 50:
+				file << "125 125 125" << "\n";
+				break;
+			case 40:
+				file << "150 150 150" << "\n";
+				break;
+			case 30:
+				file << "175 175 175" << "\n";
+				break;
+			case 20:
+				file << "200 200 200" << "\n";
+				break;
+			case 10:
+				file << "225 225 225" << "\n";
+				break;
+			default:
 				file << "255 255 255" << "\n";
+				break;
 			}
 		}
 	}
