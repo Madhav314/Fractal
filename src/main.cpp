@@ -24,50 +24,50 @@ int main() {
 	double i;
 	double j;
 
-	const int height = 500;
 	const int width = 750;
+	const int height = 625;
 
 	const double x_lit = 3.0 / width;
-	const double y_lit = 2.0 / height;
+	const double y_lit = 2.5 / height;
 
 	std::ofstream file;
 	file.open("image.ppm");
 
 	file << "P3\n" << width << ' ' << height << "\n255\n";
 
-	for (j = 1.0; j > -1.0; j -= y_lit) { // y-axis up to down
-		for (i = -2.0; i < 1.0; i += x_lit) { //x-axis left to right
+	for (j = 1.25; j > -1.25; j -= y_lit) { // y-axis up to down
+		for (i = -2.25; i < 0.75; i += x_lit) { //x-axis left to right
 			std::complex<double> c(i, j);
 			switch (mandelbrot(c)) {
 			case 100:
 				file << "0 0 0" << "\n";
 				break;
 			case 90:
-				file << "25 25 25" << "\n";
+				file << "90 0 0" << "\n";
 				break;
 			case 80:
-				file << "50 50 50" << "\n";
+				file << "180 0 0" << "\n";
 				break;
 			case 70:
-				file << "75 75 75" << "\n";
+				file << "255 0 0" << "\n";
 				break;
 			case 60:
-				file << "100 100 100" << "\n";
+				file << "0 90 0" << "\n";
 				break;
 			case 50:
-				file << "125 125 125" << "\n";
+				file << "0 180 0" << "\n";
 				break;
 			case 40:
-				file << "150 150 150" << "\n";
+				file << "0 255 0" << "\n";
 				break;
 			case 30:
-				file << "175 175 175" << "\n";
+				file << "0 0 90" << "\n";
 				break;
 			case 20:
-				file << "200 200 200" << "\n";
+				file << "0 0 180" << "\n";
 				break;
 			case 10:
-				file << "225 225 225" << "\n";
+				file << "0 0 225" << "\n";
 				break;
 			default:
 				file << "255 255 255" << "\n";
